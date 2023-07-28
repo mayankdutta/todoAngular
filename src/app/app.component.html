@@ -1,47 +1,128 @@
-<form #f="ngForm" (submit)="onSubmit(f)">
-  <div class="form-group">
-    <label>Title</label>
-    <input type="text" placeholder="full name" />
+<div class="container mt-5">
+  <div class="form-area">
+    <form #f="ngForm" (submit)="onSubmit(f)">
+      <div class="form-group">
+        <label>Title</label>
+        <input
+          type="text"
+          placeholder="title"
+          name="title"
+          ngModel
+          #title="ngModel"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': title.touched && title.invalid }"
+          required
+        />
+        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+          Title is not valid
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          type="text"
+          placeholder="Description"
+          ngModel
+          name="description"
+          class="form-control"
+          #description="ngModel"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Due Date</label>
+        <input
+          type="date"
+          placeholder="full name"
+          #dueDate="ngModel"
+          class="form-control"
+          name="dueDate"
+          ngModel
+        />
+      </div>
+
+      <div>Priority</div>
+
+      <div class="form-check">
+        <input
+          type="radio"
+          ngModel
+          value="high"
+          class="form-check-input"
+          name="priority"
+          id="priorityHigh"
+        />
+        <label class="form-check-label" for="priorityHigh">high</label>
+      </div>
+
+      <div class="form-check">
+        <input
+          type="radio"
+          ngModel
+          value="medium"
+          class="form-check-input"
+          name="priority"
+          id="priorityMedium"
+        />
+        <label class="form-check-label" for="priorityMedium">medium</label>
+      </div>
+
+      <div class="form-check">
+        <input
+          type="radio"
+          ngModel
+          value="low"
+          class="form-check-input"
+          name="priority"
+          id="priorityLow"
+        />
+        <label class="form-check-label" for="priorityLow">low</label>
+      </div>
+
+      <div>Status</div>
+      <div class="form-check">
+        <input
+          id="statusCompleted"
+          type="radio"
+          ngModel
+          class="form-check-input"
+          name="status"
+          #status="ngModel"
+          value="Completed"
+        />
+        <label class="form-check-label" for="statusCompleted">Completed</label>
+      </div>
+
+      <div class="form-check">
+        <input
+          id="statusProgress"
+          type="radio"
+          ngModel
+          #status="ngModel"
+          class="form-check-input"
+          name="status"
+          value="progress"
+        />
+        <label class="form-check-label" for="statusProgress">progress</label>
+      </div>
+
+      <div class="form-check">
+        <input
+          id="statusTodo"
+          type="radio"
+          ngModel
+          #status="ngModel"
+          class="form-check-input"
+          name="status"
+          value="todo"
+        />
+        <label class="form-check-label" for="statusTodo">to-do</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="f.invalid">
+        Submit
+      </button>
+    </form>
   </div>
-
-  <div class="form-group">
-    <label>Description</label>
-    <input type="text" placeholder="full name" />
-  </div>
-
-  <div class="form-group">
-    <label>Due Date</label>
-    <input type="date" placeholder="full name" />
-  </div>
-
-  <div class="form-group">
-    <div>Priority</div>
-
-    <input id="label-high" type="checkbox" />
-    <label for="label-high">high</label>
-    <br />
-
-    <input id="label-medium" type="checkbox" />
-    <label for="label-medium">medium</label>
-    <br />
-
-    <input id="label-low" type="checkbox" />
-    <label for="label-low">low</label>
-    <br />
-  </div>
-
-  <div class="form-group">
-    <div>Status</div>
-
-    <input id="label-completed" type="checkbox" />
-    <label for="label-completed">Completed</label>
-    <br />
-
-    <input id="label-progress" type="checkbox" />
-    <label for="label-progress">progress</label>
-    <br />
-
-    <input id="label-todo" type="checkbox" />
-    <label for="label-todo">to-do</label>
-  </div>
-</form>
+</div>
