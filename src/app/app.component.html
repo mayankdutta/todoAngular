@@ -203,7 +203,7 @@
             name="title"
             value="{{ todoItem.title }}"
             [(ngModel)]="todoItem.title"
-            (keyup)="changeTitle($event, todoItem.id)"
+            (change)="onChange($event, todoItem.id)"
           />
         </td>
 
@@ -214,7 +214,7 @@
             placeholder="description"
             value="{{ todoItem.description }}"
             [(ngModel)]="todoItem.description"
-            (keyup)="changeDesc($event, todoItem.id)"
+            (change)="onChange($event, todoItem.id)"
           />
         </td>
 
@@ -224,7 +224,7 @@
             name="date"
             value="{{ todoItem.dueDate }}"
             [(ngModel)]="todoItem.dueDate"
-            (keyup)="changeDueDate($event, todoItem.id)"
+            (change)="onChange($event, todoItem.id)"
           />
         </td>
         <td>
@@ -233,7 +233,7 @@
             id="status"
             value="{{ todoItem.status }}"
             [(ngModel)]="todoItem.status"
-            (click)="changeStatus($event, todoItem.id)"
+            (change)="onChange($event, todoItem.id)"
           >
             <option value="inProgress">Progress</option>
             <option value="todo">Todo</option>
@@ -246,9 +246,9 @@
             id="priority"
             value="{{ todoItem.priority }}"
             [(ngModel)]="todoItem.priority"
-            (click)="changePriority($event, todoItem.id)"
+            (change)="onChange($event, todoItem.id)"
           >
-            <option value="high">High</option>
+            <option name='' value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
           </select>
