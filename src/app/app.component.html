@@ -32,7 +32,6 @@
         <label>Due Date</label>
         <input
           type="date"
-          placeholder="full name"
           #dueDate="ngModel"
           class="form-control"
           name="dueDate"
@@ -157,6 +156,7 @@
             </div>
           </span>
         </th>
+        <th scope="col">Description</th>
         <th scope="col">
           <span
             >Due date
@@ -195,11 +195,67 @@
     <tbody>
       <tr *ngFor="let todoItem of userTodoList">
         <td>{{ todoItem.id }}</td>
-        <td>{{ todoItem.title }}</td>
-        <td>{{ todoItem.dueDate }}</td>
-        <td>{{ todoItem.status }}</td>
-        <td>{{ todoItem.priority }}</td>
-        <button (click)="deleteTask(todoItem.id)">X</button>
+        <!--        <td>{{ todoItem.title }}</td>-->
+        <td>
+          <input
+            type="text"
+            placeholder="Title"
+            name="title"
+            value="{{ todoItem.title }}"
+            [(ngModel)]="todoItem.title"
+            (keyup)="changeTitle($event, todoItem.id)"
+          />
+        </td>
+
+        <td>
+          <input
+            type="text"
+            name="description"
+            placeholder="description"
+            value="{{ todoItem.description }}"
+            [(ngModel)]="todoItem.description"
+            (keyup)="changeDesc($event, todoItem.id)"
+          />
+        </td>
+
+        <td>
+          <input
+            type="date"
+            name="date"
+            value="{{ todoItem.dueDate }}"
+            [(ngModel)]="todoItem.dueDate"
+            (keyup)="changeDueDate($event, todoItem.id)"
+          />
+        </td>
+        <td>
+          <select
+            name="status"
+            id="status"
+            value="{{ todoItem.status }}"
+            [(ngModel)]="todoItem.status"
+            (click)="changeStatus($event, todoItem.id)"
+          >
+            <option value="inProgress">Progress</option>
+            <option value="todo">Todo</option>
+            <option value="done">Done</option>
+          </select>
+        </td>
+        <td>
+          <select
+            name="priority"
+            id="priority"
+            value="{{ todoItem.priority }}"
+            [(ngModel)]="todoItem.priority"
+            (click)="changePriority($event, todoItem.id)"
+          >
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </td>
+        <td>
+          <button (click)="deleteTask(todoItem.id)">X</button>
+        </td>
       </tr>
     </tbody>
   </table>

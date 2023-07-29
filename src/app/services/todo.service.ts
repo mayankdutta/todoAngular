@@ -5,7 +5,7 @@ import { iTodoItem } from '../models/todo-item';
   providedIn: 'root',
 })
 export class TodoService {
-  todoList: Array<iTodoItem> = [];
+  todoList: iTodoItem[] = [];
 
   add(todoItem: iTodoItem) {
     this.todoList.push(todoItem);
@@ -14,6 +14,22 @@ export class TodoService {
 
   deleteTask(id: number) {
     this.todoList = this.todoList.filter((todo) => todo.id !== id);
+    this.saveToLocalStorage();
+    return this.todoList;
+  }
+
+  updateTask(id: number, modifyingData: any) {
+    this.todoList = this.todoList.map(value=> {
+      if (value.id === id) {
+        value.title = modifyingData.title ? modifyingData.title :  value.title;
+        value.description = modifyingData.description ? modifyingData.description :  value.description;
+        value.priority = modifyingData.priority ? modifyingData.priority :  value.priority;
+        value.status = modifyingData.status ? modifyingData.status :  value.status;
+        value.dueDate = modifyingData.dueDate ? modifyingData.dueDate :  value.dueDate;
+      }
+      return value;
+    })
+
     this.saveToLocalStorage();
     return this.todoList;
   }

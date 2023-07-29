@@ -11,6 +11,8 @@ import { iTodoItem } from './models/todo-item';
 export class AppComponent {
   title = 'codingNinja';
   userTodoList: iTodoItem[] = [];
+  modifyingFlag: boolean = false;
+  modifyingData: any = {};
 
   constructor(private todoService: TodoService) {
     this.userTodoList = todoService.todoList;
@@ -34,13 +36,43 @@ export class AppComponent {
     this.userTodoList = this.todoService.deleteTask(id);
   }
 
+  changeTitle(event: any, id: number) {
+    this.userTodoList = this.todoService.updateTask(id, {
+      title: event.target.value,
+    });
+  }
+
+  changeDesc(event: any, id: number) {
+    console.log([ event.target.name ])
+    this.userTodoList = this.todoService.updateTask(id, {
+      description: event.target.value,
+    });
+  }
+
+  changeDueDate(event: any, id: number) {
+    this.userTodoList = this.todoService.updateTask(id, {
+      dueDate: event.target.value,
+    });
+  }
+
+  changeStatus(event: any, id: number) {
+    this.userTodoList = this.todoService.updateTask(id, {
+      status: event.target.value,
+    });
+  }
+
+  changePriority(event: any, id: number) {
+    this.userTodoList = this.todoService.updateTask(id, {
+      priority: event.target.value,
+    });
+  }
 
   sortAsc(attribute: string) {
     this.userTodoList = this.todoService.sortAsc(attribute);
-
   }
-
   sortDesc(attribute: string) {
     this.userTodoList = this.todoService.sortDesc(attribute);
   }
+
+  protected readonly onkeyup = onkeyup;
 }
