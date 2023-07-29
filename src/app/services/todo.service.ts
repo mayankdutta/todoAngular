@@ -81,29 +81,29 @@ export class TodoService {
       return elem1.id - elem2.id;
     },
     priority: (elem1: iTodoItem, elem2: iTodoItem) => {
-      const check = (attribute: string) => {
+      const stringToPriority = (attribute: string) => {
         attribute = attribute.toLowerCase();
         if (attribute === 'low') return 1;
         if (attribute === 'medium') return 2;
         return 3;
       };
 
-      let priority1 = check(elem1.priority);
-      let priority2 = check(elem2.priority);
+      let priority1 = stringToPriority(elem1.priority);
+      let priority2 = stringToPriority(elem2.priority);
 
       if (priority1 !== priority2) return priority1 - priority2;
       return elem1.id - elem2.id;
     },
     status: (elem1: iTodoItem, elem2: iTodoItem) => {
-      const check = (attribute: string) => {
+      const stringToStatus = (attribute: string) => {
         attribute = attribute.toLowerCase();
         if (attribute === 'done') return 3;
         if (attribute === 'todo') return 2;
         return 1;
       };
 
-      let status1 = check(elem1.status);
-      let status2 = check(elem2.status);
+      let status1 = stringToStatus(elem1.status);
+      let status2 = stringToStatus(elem2.status);
 
       if (status1 !== status2) return status1 - status2;
       return elem1.id - elem2.id;
