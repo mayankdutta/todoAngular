@@ -1,137 +1,4 @@
 <div class="container">
-  <div class="form-area">
-    <form #f="ngForm" (submit)="onSubmit(f)">
-      <div class="form-group">
-        <input
-          type="text"
-          placeholder="Title"
-          name="title"
-          ngModel
-          #title="ngModel"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': title.touched && title.invalid }"
-          required
-        />
-        <!-- <div class="alert alert-danger" *ngIf="title.touched && title.invalid"> -->
-        <!--   Title is not valid -->
-        <!-- </div> -->
-      </div>
-
-      <div class="form-group">
-        <textarea
-          type="text"
-          placeholder="Description"
-          ngModel
-          name="description"
-          class="form-control"
-          #description="ngModel"
-        ></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Due Date</label>
-        <input
-          type="date"
-          #dueDate="ngModel"
-          class="form-control"
-          name="dueDate"
-          ngModel
-        />
-      </div>
-
-      <div class="priority-section">
-        <div>Priority</div>
-
-        <div class="form-check">
-          <input
-            type="radio"
-            ngModel
-            value="high"
-            class="form-check-input"
-            name="priority"
-            id="priorityHigh"
-          />
-          <label class="form-check-label" for="priorityHigh">high</label>
-        </div>
-
-        <div class="form-check">
-          <input
-            type="radio"
-            ngModel
-            value="medium"
-            class="form-check-input"
-            name="priority"
-            id="priorityMedium"
-          />
-          <label class="form-check-label" for="priorityMedium">medium</label>
-        </div>
-
-        <div class="form-check">
-          <input
-            type="radio"
-            ngModel
-            value="low"
-            class="form-check-input"
-            name="priority"
-            id="priorityLow"
-          />
-          <label class="form-check-label" for="priorityLow">low</label>
-        </div>
-      </div>
-
-      <div class="status-section">
-        <div>Status</div>
-
-        <div class="form-check">
-          <input
-            id="statusProgress"
-            type="radio"
-            ngModel
-            #status="ngModel"
-            class="form-check-input"
-            name="status"
-            value="progress"
-          />
-          <label class="form-check-label" for="statusProgress">progress</label>
-        </div>
-
-        <div class="form-check">
-          <input
-            id="statusTodo"
-            type="radio"
-            ngModel
-            #status="ngModel"
-            class="form-check-input"
-            name="status"
-            value="todo"
-          />
-          <label class="form-check-label" for="statusTodo">to-do</label>
-        </div>
-
-        <div class="form-check">
-          <input
-            id="statusCompleted"
-            type="radio"
-            ngModel
-            class="form-check-input"
-            name="status"
-            #status="ngModel"
-            value="Completed"
-          />
-          <label class="form-check-label" for="statusCompleted"
-            >Completed</label
-          >
-        </div>
-      </div>
-
-      <button type="submit" class="btn btn-primary" [disabled]="f.invalid">
-        Submit
-      </button>
-    </form>
-  </div>
-</div>
-
-<div class="container">
   <h1>Todo List so far</h1>
 
   <table class="table">
@@ -139,21 +6,16 @@
       <tr>
         <th scope="col">
           <span
-            >ID
-            <div>
-              <button (click)="sortAsc('id')">Asc</button
-              ><button (click)="sortDesc('id')">Desc</button>
-            </div></span
-          >
+            >ID <button (click)="sortAsc('id')">↑</button
+            ><button (click)="sortDesc('id')">↓</button>
+          </span>
         </th>
         <th scope="col">
           <span
             >Title
 
-            <div>
-              <button (click)="sortAsc('title')">Asc</button
-              ><button (click)="sortDesc('title')">Desc</button>
-            </div>
+            <button (click)="sortAsc('title')">↑</button
+            ><button (click)="sortDesc('title')">↓</button>
           </span>
         </th>
         <th scope="col">Description</th>
@@ -161,34 +23,28 @@
           <span
             >Due date
 
-            <div>
-              <button (click)="sortAsc('dueDate')">Asc</button
-              ><button (click)="sortDesc('dueDate')">Desc</button>
-            </div></span
-          >
+            <button (click)="sortAsc('dueDate')">↑</button
+            ><button (click)="sortDesc('dueDate')">↓</button>
+          </span>
         </th>
         <th scope="col">
           <span
             >Status
 
-            <div>
-              <button (click)="sortAsc('status')">Asc</button
-              ><button (click)="sortDesc('status')">Desc</button>
-            </div></span
-          >
+            <button (click)="sortAsc('status')">↑</button
+            ><button (click)="sortDesc('status')">↓</button>
+          </span>
         </th>
         <th scope="col">
           <span
             >Priority
 
-            <div>
-              <button (click)="sortAsc('priority')">Asc</button
-              ><button (click)="sortDesc('priority')">Desc</button>
-            </div></span
-          >
+            <button (click)="sortAsc('priority')">↑</button
+            ><button (click)="sortDesc('priority')">↓</button>
+          </span>
         </th>
         <th scope="col">
-          <span>Delete </span>
+          <span>Operation</span>
         </th>
       </tr>
     </thead>
@@ -248,7 +104,7 @@
             [(ngModel)]="todoItem.priority"
             (change)="onChange($event, todoItem.id)"
           >
-            <option name='' value="high">High</option>
+            <option name="" value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
           </select>
@@ -258,5 +114,71 @@
         </td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <!--        <td>{{ todoItem.title }}</td>-->
+        <td>
+          <input
+            type="text"
+            placeholder="Title"
+            name="title"
+            value="{{ newData.title }}"
+            [(ngModel)]="newData.title"
+            (change)="onChange($event, newData.id)"
+          />
+        </td>
+
+        <td>
+          <input
+            type="text"
+            name="description"
+            placeholder="description"
+            value="{{ newData.description }}"
+            [(ngModel)]="newData.description"
+            (change)="onChange($event, newData.id)"
+          />
+        </td>
+
+        <td>
+          <input
+            type="date"
+            name="date"
+            value="{{ newData.dueDate }}"
+            [(ngModel)]="newData.dueDate"
+            (change)="onChange($event, newData.id)"
+          />
+        </td>
+        <td>
+          <select
+            name="status"
+            id="status"
+            value="{{ newData.status }}"
+            [(ngModel)]="newData.status"
+            (change)="onChange($event, newData.id)"
+          >
+            <option value="inProgress">Progress</option>
+            <option value="todo">Todo</option>
+            <option value="done">Done</option>
+          </select>
+        </td>
+        <td>
+          <select
+            name="priority"
+            id="priority"
+            value="{{ newData.priority }}"
+            [(ngModel)]="newData.priority"
+            (change)="onChange($event, newData.id)"
+          >
+            <option name="" value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </td>
+        <td>
+          <button (click)="addTask()">+</button>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 </div>

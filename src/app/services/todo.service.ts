@@ -10,6 +10,8 @@ export class TodoService {
   add(todoItem: iTodoItem) {
     this.todoList.push(todoItem);
     this.saveToLocalStorage();
+
+    return this.todoList;
   }
 
   deleteTask(id: number) {
