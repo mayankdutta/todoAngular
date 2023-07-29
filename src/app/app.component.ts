@@ -10,18 +10,37 @@ import { iTodoItem } from './models/todo-item';
 })
 export class AppComponent {
   title = 'codingNinja';
+  userTodoList: iTodoItem[] = [];
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService) {
+    this.userTodoList = todoService.todoList;
+  }
 
   onSubmit(data: NgForm) {
     console.log(data.value);
-    this.todoService.add(data.value);
+    this.todoService.add({
+      ...data.value,
+      id: this.todoService.todoList.length + 1,
+    });
 
-
-    console.log(this.todoService.todoList)
+    console.log(this.todoService.todoList);
   }
 
   getValue(value: any) {
     // console.log(value);
+  }
+
+  deleteTask(id: number) {
+    this.userTodoList = this.todoService.deleteTask(id);
+  }
+
+
+  sortAsc(attribute: string) {
+    this.userTodoList = this.todoService.sortAsc(attribute);
+
+  }
+
+  sortDesc(attribute: string) {
+    this.userTodoList = this.todoService.sortDesc(attribute);
   }
 }

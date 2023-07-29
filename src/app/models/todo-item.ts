@@ -9,4 +9,14 @@ export interface iTodoItem {
 
   createdAt: Date;
   updatedAt: Date;
+
+
 }
+
+        // if (elem1.id < elem2.id) {
+        //   return -1;
+        // } else if (elem1.id > elem2.id) {
+        //   return 1;
+        // } else {
+        //   return 0;
+        // }
